@@ -5,18 +5,17 @@
 //  Created by Karl Stenerud on 10-08-17.
 //
 
-#import "ImageAndLabelButton.h"
+#import "CCSpriteButton.h"
 #import "CCNode+ContentSize.h"
 
 enum {
     kNormalSpriteTag = 787878,
-    kSelectedSpriteTag,
-    kLabelTag
+    kSelectedSpriteTag
 };
 
 #pragma mark ImageAndLabelButton
 
-@implementation ImageAndLabelButton
+@implementation CCSpriteButton
 
 @synthesize labelOffsetWhenDown;
 
@@ -78,12 +77,14 @@ enum {
     selectedSprite.tag = kSelectedSpriteTag;
     
 	label.position = normalSprite.position;
-    label.tag = kLabelTag;
 	
 	CCNode* node = [CCNode node];
 	[node addChild:selectedSprite];
 	[node addChild:normalSprite];
-	[node addChild:label];
+    
+    if (label != nil)    
+        [node addChild:label];
+    
 	[node setContentSizeFromChildren];
 	
     return [super initWithTouchablePortion:node target:targetIn selector:selectorIn];
@@ -99,8 +100,7 @@ enum {
     CCNode *selectedSprite = [self.touchablePortion getChildByTag:kSelectedSpriteTag];
     selectedSprite.visible = YES;
 
-    CCNode *theLabel = [self.touchablePortion getChildByTag:kLabelTag];
-    theLabel.position = ccpAdd(theLabel.position, self.labelOffsetWhenDown);
+    label.position = ccpAdd(label.position, self.labelOffsetWhenDown);
 }
 
 - (void)onButtonUp
@@ -113,8 +113,7 @@ enum {
     CCNode *selectedSprite = [self.touchablePortion getChildByTag:kSelectedSpriteTag];
     selectedSprite.visible = NO;
     
-    CCNode *theLabel = [self.touchablePortion getChildByTag:kLabelTag];
-    theLabel.position = ccpSub(theLabel.position, self.labelOffsetWhenDown);
+    label.position = ccpSub(label.position, self.labelOffsetWhenDown);
 }
 
 @synthesize label;

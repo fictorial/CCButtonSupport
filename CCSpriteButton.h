@@ -9,7 +9,7 @@
 
 @class CCSprite;
 
-@interface ImageAndLabelButton : Button
+@interface CCSpriteButton : Button
 {
 	CCLabelTTF* label;
 }
