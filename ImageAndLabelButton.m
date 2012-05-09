@@ -94,14 +94,12 @@ enum {
     [super onButtonDown];
 
     CCNode *normalSprite = [self.touchablePortion getChildByTag:kNormalSpriteTag];
-    [self.touchablePortion reorderChild:normalSprite z:0];
-
+    normalSprite.visible = NO;
+    
     CCNode *selectedSprite = [self.touchablePortion getChildByTag:kSelectedSpriteTag];
-    [self.touchablePortion reorderChild:selectedSprite z:1];
+    selectedSprite.visible = YES;
 
     CCNode *theLabel = [self.touchablePortion getChildByTag:kLabelTag];
-    [self.touchablePortion reorderChild:theLabel z:2];
-    
     theLabel.position = ccpAdd(theLabel.position, self.labelOffsetWhenDown);
 }
 
@@ -110,14 +108,12 @@ enum {
     [super onButtonUp];
     
     CCNode *normalSprite = [self.touchablePortion getChildByTag:kNormalSpriteTag];
-    [self.touchablePortion reorderChild:normalSprite z:1];
+    normalSprite.visible = YES;
     
     CCNode *selectedSprite = [self.touchablePortion getChildByTag:kSelectedSpriteTag];
-    [self.touchablePortion reorderChild:selectedSprite z:0];
+    selectedSprite.visible = NO;
     
     CCNode *theLabel = [self.touchablePortion getChildByTag:kLabelTag];
-    [self.touchablePortion reorderChild:theLabel z:2];
-    
     theLabel.position = ccpSub(theLabel.position, self.labelOffsetWhenDown);
 }
 
