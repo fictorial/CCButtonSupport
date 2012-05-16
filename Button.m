@@ -28,7 +28,7 @@
 		targetedTouches = YES;
 		swallowTouches = YES;
 		isTouchEnabled = YES;
-		scaleOnPush = YES;
+		scaleOnPush = NO;
 		
 		target = targetIn;
 		selector = selectorIn;
